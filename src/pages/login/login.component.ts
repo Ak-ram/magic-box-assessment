@@ -18,8 +18,9 @@ export default class LoginComponent {
     password: 'emilyspass',
   });
   loginForm = form(this.loginModal, (schemaPath) => {
-    required(schemaPath.username, { message: 'Email is required' });
+    required(schemaPath.username, { message: 'Username is required' });
     required(schemaPath.password, { message: 'Password is required' });
+    minLength(schemaPath.username, 3, { message: 'Username must be at least 3 characters' });
     minLength(schemaPath.password, 6, { message: 'Password must be at least 6 characters' });
   });
 
