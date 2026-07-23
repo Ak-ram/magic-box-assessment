@@ -16,11 +16,11 @@
       <div class="mt-4">
         <label class="block text-sm font-medium mb-1">Password</label>
         <div class="relative">
+          <!-- NEET TO CHECK ANOTHER SOLUTOIN FOR $any -->
           <input
             type="password"
             placeholder="Enter your password"
             [value]="password()"
-          <!-- NEET TO CHECK ANOTHER SOLUTOIN FOR $any -->
             (input)="password.set($any($event.target).value)"
             class="w-full border border-gray-300 rounded-lg px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
           />
