@@ -3,20 +3,15 @@
     <div class="bg-white rounded-2xl shadow-sm p-8 w-full max-w-md">
       <h1 class="text-2xl font-bold">Login</h1>
       <p class="text-gray-500 mt-1 pb-4 border-b border-gray-200">Welcome back to Magic Box</p>
-      <!-- Email Field -->
+      <!-- Username Field -->
       <div class="mt-6">
-        <label class="block text-sm font-medium mb-1">Email</label>
+        <label class="block text-sm font-medium mb-1">Username</label>
         <input
-          type="email"
-          placeholder="Enter your email"
-          [formField]="loginForm.email"
+          type="text"
+          placeholder="Enter your username"
+          [formField]="loginForm.username"
           class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
         />
-        @if (loginForm.email().touched() && loginForm.email().errors(); as errors) {
-          @for (error of errors; track error.message) {
-            <p class="text-red-500 text-xs mt-1">{{ error.message }}</p>
-          }
-        }
       </div>
       <!-- Password Field -->
       <div class="mt-4">

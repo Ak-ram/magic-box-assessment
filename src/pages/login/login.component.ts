@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ILoginForm } from '../../models/auth.model';
 import { form, FormField, required, email, minLength } from '@angular/forms/signals';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -8,15 +9,16 @@ import { form, FormField, required, email, minLength } from '@angular/forms/sign
   imports: [FormField],
 })
 export default class LoginComponent {
+  // Injection list
+  private readonly authService: AuthService = inject(AuthService);
   // State
   rememberMe = signal<boolean>(false);
   loginModal = signal<ILoginForm>({
-    email: '',
-    password: '',
+    username: 'emilys',
+    password: 'emilyspass',
   });
   loginForm = form(this.loginModal, (schemaPath) => {
-    required(schemaPath.email, { message: 'Email is required' });
-    email(schemaPath.email, { message: 'Email is not valid' });
+    required(schemaPath.username, { message: 'Email is required' });
     required(schemaPath.password, { message: 'Password is required' });
     minLength(schemaPath.password, 6, { message: 'Password must be at least 6 characters' });
   });
@@ -24,6 +26,9 @@ export default class LoginComponent {
   // Methods
   submit() {
     if (this.loginForm().valid()) {
+      this.authService.login(this.loginModal()).subscribe((res) => {
+        console.log('auth', res);
+      });
       console.log('Form Data:', this.loginModal());
       console.log('Remember Me:', this.rememberMe());
     }

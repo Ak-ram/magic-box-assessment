@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { loginResponse, userProfileResponse } from '../models/auth.model';
+import { ILoginForm, loginResponse, userProfileResponse } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +13,9 @@ export class AuthService {
   // Injection list
   private readonly http: HttpClient = inject(HttpClient);
 
-  login(): Observable<loginResponse> {
+  login(loginForm?: ILoginForm): Observable<loginResponse> {
     const body = JSON.stringify({
-      username: 'emilys',
-      password: 'emilyspass',
+      ...loginForm,
       expiresInMins: 30,
     });
     return this.http
