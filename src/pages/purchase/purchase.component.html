@@ -1,1 +1,90 @@
-Landing page
+<div class="min-h-screen bg-white">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 py-10">
+    <!-- Left: Form -->
+    <div class="md:col-span-2">
+      <h1 class="text-2xl font-semibold">Subscribe</h1>
+      <p class="text-gray-500 mb-6">to our Magic Box</p>
+      <h2 class="text-lg font-medium mb-3">Contact Information</h2>
+      <div class="space-y-3 mb-6">
+        <input
+          type="text"
+          placeholder="Your name"
+          [value]="name()"
+          (input)="name.set($any($event.target).value)"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
+        />
+        <input
+          type="tel"
+          placeholder="Mobile Number"
+          [value]="mobile()"
+          (input)="mobile.set($any($event.target).value)"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
+        />
+      </div>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-lg font-medium">Child's Information</h2>
+        <button
+          type="button"
+          (click)="addChild()"
+          class="border border-[#AB95F9] text-[#AB95F9] rounded-full px-4 py-1.5 text-sm font-medium"
+        >
+          Add child
+        </button>
+      </div>
+      <div class="space-y-3 mb-6">
+        <input
+          type="text"
+          placeholder="Child's Full Name"
+          [value]="childName()"
+          (input)="childName.set($any($event.target).value)"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
+        />
+        <input
+          type="text"
+          placeholder="Child's Date of Birth"
+          [value]="childDob()"
+          (input)="childDob.set($any($event.target).value)"
+          onfocus="this.type = 'date'"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
+        />
+      </div>
+      <h2 class="text-lg font-medium mb-3">Gender</h2>
+      <div class="flex gap-6 mb-8">
+        <label
+          class="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-3 flex-1 cursor-pointer"
+        >
+          <span>Boy</span>
+          <input
+            type="radio"
+            name="gender"
+            class="ml-auto accent-[#AB95F9]"
+            [checked]="gender() === 'boy'"
+            (change)="gender.set('boy')"
+          />
+        </label>
+        <label
+          class="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-3 flex-1 cursor-pointer"
+        >
+          <span>Girl</span>
+          <input
+            type="radio"
+            name="gender"
+            class="ml-auto accent-[#AB95F9]"
+            [checked]="gender() === 'girl'"
+            (change)="gender.set('girl')"
+          />
+        </label>
+      </div>
+    </div>
+    <!-- Right: Summary -->
+    <summary-card [price]="price()" [taxes]="taxes()"></summary-card>
+  </div>
+  <div class="max-w-5xl mx-auto px-6 pb-10">
+    <button
+      (click)="submit()"
+      class="w-full md:w-2/3 bg-[#AB95F9] text-white font-medium rounded-full py-3"
+    >
+      Continue to payment
+    </button>
+  </div>
+</div>
