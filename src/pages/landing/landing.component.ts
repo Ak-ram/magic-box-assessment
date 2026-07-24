@@ -12,12 +12,12 @@ export default class LandingComponent implements OnInit {
   private readonly router: Router = inject(Router);
 
   ngOnInit() {
-    this.authService.login().subscribe(res=>{
-      console.log('auth', res);
-      setTimeout(()=>{
-      this.authService.getUserProfile(res.accessToken).subscribe((res) => console.log(res));
-      }, 2000)
-    });
+    // this.authService.login().subscribe(res=>{
+    //   console.log('auth', res);
+    //   setTimeout(()=>{
+    //   this.authService.getUserProfile(res.accessToken).subscribe((res) => console.log(res));
+    //   }, 2000)
+    // });
 
   }
 

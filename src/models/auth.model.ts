@@ -81,12 +81,16 @@ export interface userProfileResponse {
   role: string;
 }
 
+export interface IChild {
+  childFullName: string;
+  childDOB: string;
+  gender: "boy" | "girl";
+}
+
 export interface IPurchaseForm {
   name: string;
   mobile: string;
-  childFullName: string;
-  childDOB: string;
-  gender: string;
+  children: IChild[];
 }
 
 export interface ILoginForm {

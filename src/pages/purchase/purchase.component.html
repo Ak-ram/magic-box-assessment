@@ -9,72 +9,73 @@
         <input
           type="text"
           placeholder="Your name"
-          [value]="name()"
-          (input)="name.set($any($event.target).value)"
+          [formField]="purchaseForm.name"
           class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
         />
         <input
           type="tel"
           placeholder="Mobile Number"
-          [value]="mobile()"
-          (input)="mobile.set($any($event.target).value)"
+          [formField]="purchaseForm.mobile"
           class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
         />
       </div>
-      <div class="flex items-center justify-between mb-3">
-        <h2 class="text-lg font-medium">Child's Information</h2>
-        <button
-          type="button"
-          (click)="addChild()"
-          class="border border-[#AB95F9] text-[#AB95F9] rounded-full px-4 py-1.5 text-sm font-medium"
-        >
-          Add child
-        </button>
-      </div>
-      <div class="space-y-3 mb-6">
-        <input
-          type="text"
-          placeholder="Child's Full Name"
-          [value]="childName()"
-          (input)="childName.set($any($event.target).value)"
-          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
-        />
-        <input
-          type="text"
-          placeholder="Child's Date of Birth"
-          [value]="childDob()"
-          (input)="childDob.set($any($event.target).value)"
-          onfocus="this.type = 'date'"
-          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
-        />
-      </div>
-      <h2 class="text-lg font-medium mb-3">Gender</h2>
-      <div class="flex gap-6 mb-8">
-        <label
-          class="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-3 flex-1 cursor-pointer"
-        >
-          <span>Boy</span>
+      @let purchaseFormVal = purchaseForm.children().value();
+      @for (child of purchaseFormVal; track $index) {
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-lg font-medium">Child's Information</h2>
+          @if ($index === purchaseFormVal.length - 1) {
+            <button
+              type="button"
+              (click)="addChild()"
+              class="border border-[#AB95F9] text-[#AB95F9] rounded-full px-4 py-1.5 text-sm font-medium"
+            >
+              Add child
+            </button>
+          }
+        </div>
+        <div class="space-y-3 mb-6">
           <input
-            type="radio"
-            name="gender"
-            class="ml-auto accent-[#AB95F9]"
-            [checked]="gender() === 'boy'"
-            (change)="gender.set('boy')"
+            type="text"
+            placeholder="Child's Full Name"
+            [formField]="purchaseForm.children[$index].childFullName"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
           />
-        </label>
-        <label
-          class="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-3 flex-1 cursor-pointer"
-        >
-          <span>Girl</span>
           <input
-            type="radio"
-            name="gender"
-            class="ml-auto accent-[#AB95F9]"
-            [checked]="gender() === 'girl'"
-            (change)="gender.set('girl')"
+            type="text"
+            placeholder="Child's Date of Birth"
+            [formField]="purchaseForm.children[$index].childDOB"
+            onfocus="this.type = 'date'"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
           />
-        </label>
-      </div>
+        </div>
+        <h2 class="text-lg font-medium mb-3">Gender</h2>
+        <div class="flex gap-6 mb-8">
+          <label
+            class="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-3 flex-1 cursor-pointer"
+          >
+            <span>Boy</span>
+            <input
+              type="radio"
+              [name]="'gender-' + $index"
+              class="ml-auto accent-[#AB95F9]"
+              [checked]="purchaseForm.children[$index].gender().value() === 'boy'"
+              (change)="purchaseForm.children[$index].gender().value.set('boy')"
+            />
+          </label>
+          <label
+            class="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-3 flex-1 cursor-pointer"
+          >
+            <span>Girl</span>
+            <input
+              type="radio"
+              [name]="'gender-' + $index"
+              class="ml-auto accent-[#AB95F9]"
+              [checked]="purchaseForm.children[$index].gender().value() === 'girl'"
+              (change)="purchaseForm.children[$index].gender().value.set('girl')"
+            />
+          </label>
+        </div>
+      }
     </div>
     <!-- Right: Summary -->
     <summary-card [price]="price()" [taxes]="taxes()"></summary-card>
