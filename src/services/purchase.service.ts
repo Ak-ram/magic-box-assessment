@@ -4,8 +4,8 @@ import { IPurchaseForm } from '../models/auth.model';
   providedIn: 'root',
 })
 export class PurchaseService {
-  private readonly storageKey = 'purchase-draft';
   // State
+  private readonly storageKey = 'purchase-draft';
   draft = signal<IPurchaseForm | null>(this.getStoredDraft());
 
   /**

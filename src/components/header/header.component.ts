@@ -2,6 +2,7 @@ import { Component, effect, inject, signal, WritableSignal } from '@angular/core
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { IUserProfileResponse } from '../../models/auth.model';
+import { PurchaseService } from '../../services/purchase.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,6 +12,7 @@ import { IUserProfileResponse } from '../../models/auth.model';
 export default class HeaderComponent {
   // Injection list
   private readonly authService: AuthService = inject(AuthService);
+  private readonly purchaseService = inject(PurchaseService);
   private readonly router: Router = inject(Router);
 
   // State
@@ -34,6 +36,7 @@ export default class HeaderComponent {
    * **/
   logout(): void {
     this.authService.logout();
+    this.purchaseService.clearDraft();
     this.router.navigate(['/landing']);
   }
 }

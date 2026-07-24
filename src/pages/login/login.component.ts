@@ -1,8 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { ILoginForm } from '../../models/auth.model';
 import { form, FormField, required, minLength } from '@angular/forms/signals';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -13,9 +14,9 @@ export default class LoginComponent {
   // Injection list
   private readonly authService: AuthService = inject(AuthService);
   private readonly router: Router = inject(Router);
-  private readonly route: ActivatedRoute = inject(ActivatedRoute);
 
   // State
+  redirect = input<string>();
   rememberMe = signal<boolean>(false);
   loginModal = signal<ILoginForm>({
     username: 'emilys',
@@ -36,7 +37,7 @@ export default class LoginComponent {
     if (this.loginForm().valid()) {
       this.authService.login(this.loginModal(), this.rememberMe()).subscribe({
         next: () => {
-          const redirectUrl = this.route.snapshot.queryParamMap.get('redirect') || '/landing';
+          const redirectUrl = this.redirect() || '/landing';
           this.router.navigate([redirectUrl]);
         },
       });
