@@ -94,6 +94,7 @@ export default class PurchaseComponent {
       return;
     }
     this.purchaseService.clearDraft();
+    window.alert('Purchase submitted successfully!');
     console.log('submitting purchase', this.purchaseModel());
   }
 }
