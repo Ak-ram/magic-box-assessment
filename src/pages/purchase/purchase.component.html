@@ -31,18 +31,29 @@
       </div>
       @let purchaseFormVal = purchaseForm.children().value();
       <div class="h-84 overflow-y-auto">
-        @for (child of purchaseFormVal; track $index;) {
+        @for (child of purchaseFormVal; track $index) {
           <div class="flex items-center justify-between mb-3">
             <h2 class="text-lg font-medium">Child's Information</h2>
-            @if ($index === purchaseFormVal.length - 1) {
-              <button
-                type="button"
-                (click)="addChild()"
-                class="cursor-pointer border border-[#AB95F9] hover:bg-[#AB95F9] hover:text-white transition-colors duration-400 text-[#AB95F9] rounded-full px-4 py-1.5 text-sm font-medium"
-              >
-                Add child
-              </button>
-            }
+            <div>
+              @if ($index === purchaseFormVal.length - 1) {
+                <button
+                  type="button"
+                  (click)="addChild()"
+                  class="cursor-pointer border border-[#AB95F9] hover:bg-[#AB95F9] hover:text-white transition-colors duration-400 text-[#AB95F9] rounded-full px-4 py-1.5 text-sm font-medium"
+                >
+                  Add child
+                </button>
+              }
+              @if (purchaseFormVal.length > 1) {
+                <button
+                  type="button"
+                  (click)="removeChild($index)"
+                  class="cursor-pointer ml-2 border border-red-400 text-red-300 hover:bg-red-400 hover:border-red-500 hover:text-white  transition-colors duration-400 rounded-full px-4 py-1.5 text-sm font-medium"
+                >
+                  Remove
+                </button>
+              }
+            </div>
           </div>
           <div class="space-y-3 mb-6">
             <input
@@ -100,7 +111,7 @@
       </div>
     </div>
     <!-- Right: Summary -->
-    <summary-card [price]="price()" [taxes]="taxes()"></summary-card>
+    <summary-card [subtotal]="subtotal()" [taxes]="taxes()"></summary-card>
   </div>
   <div class="max-w-5xl mx-auto px-6 pb-10">
     <button

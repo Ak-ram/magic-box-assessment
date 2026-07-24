@@ -6,7 +6,7 @@ import { Component, input } from '@angular/core';
   standalone: true,
 })
 export default class SummaryCardComponent {
-  price = input.required<number>();
+  subtotal = input.required<number>();
   taxes = input.required<number>();
-  total = () => this.price() + this.taxes();
+  total = () => this.subtotal() + this.taxes();
 }

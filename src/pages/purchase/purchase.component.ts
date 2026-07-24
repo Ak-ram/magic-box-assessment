@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, computed,
   ElementRef,
   inject,
   signal,
@@ -32,7 +32,11 @@ export default class PurchaseComponent {
   private readonly router = inject(Router);
 
   // State
-  childrenWrapper = viewChild<ElementRef<HTMLDivElement>>('childrenWrapper');
+  readonly boxPrice = 100;
+  readonly boxTax = 10;
+  childrenCount = computed(()=> this.purchaseModel().children.length);
+  subtotal = computed(() => this.boxPrice * this.childrenCount());
+  taxes = computed(() => this.boxTax * this.childrenCount());
   purchaseModel = signal<IPurchaseForm>(
     this.purchaseService.draft() ?? {
       name: '',
@@ -61,14 +65,23 @@ export default class PurchaseComponent {
       });
     });
   });
-  price = signal(456);
-  taxes = signal(4.0);
 
   // Methods
 
   // Note: Add jsDoc description here
   addChild() {
-    this.purchaseModel().children.push({ childFullName: '', childDOB: '', gender: 'boy' });
+    // this.purchaseModel().children.push({ childFullName: '', childDOB: '', gender: 'boy' });
+    this.purchaseModel.update((current)=> ({
+      ...current,
+      children: [...current.children, { childFullName: '', childDOB: '', gender: 'boy' }]
+    }))
+  }
+
+  removeChild(index: number) {
+    this.purchaseModel.update((current)=> ({
+      ...current,
+      children: current.children.filter((_, i) => i !== index)
+    }))
   }
   // Note: Add jsDoc description here
   submit() {
