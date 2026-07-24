@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'summary-card',
@@ -8,5 +8,7 @@ import { Component, input } from '@angular/core';
 export default class SummaryCardComponent {
   subtotal = input.required<number>();
   taxes = input.required<number>();
+  childrenCount = input.required<number>();
+  children = computed(() => Array(this.childrenCount()).fill(0));
   total = () => this.subtotal() + this.taxes();
 }

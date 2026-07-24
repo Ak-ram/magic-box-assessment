@@ -35,7 +35,7 @@ export default class PurchaseComponent {
     this.purchaseService.draft() ?? {
       name: '',
       mobile: '',
-      children: [{ childFullName: '', childDOB: '', gender: '' as 'boy' }],
+      children: [{ childFullName: '', childDOB: '', gender: 'boy' }],
     },
   );
   purchaseForm = form(this.purchaseModel, (schemaPath) => {
