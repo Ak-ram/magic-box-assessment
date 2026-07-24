@@ -39,7 +39,7 @@
                 <button
                   type="button"
                   (click)="removeChild($index)"
-                  class="cursor-pointer mr-2 border border-red-400 text-red-300 hover:bg-red-400 hover:border-red-500 hover:text-white  transition-colors duration-400 rounded-full px-4 py-1.5 text-sm font-medium"
+                  class="cursor-pointer mr-2 border border-red-400 text-red-300 hover:bg-red-400 hover:border-red-500 hover:text-white transition-colors duration-400 rounded-full px-4 py-1.5 text-sm font-medium"
                 >
                   Remove
                 </button>
@@ -74,9 +74,11 @@
                 purchaseForm.children[$index].childDOB().errors();
               as errors
             ) {
-              @for (error of errors; track error.message) {
-                <p class="text-red-500 text-xs">{{ error.message }}</p>
-              }
+              <ul class="list-disc list-inside">
+                @for (error of errors; track error.message) {
+                  <li class="text-red-500 text-xs">{{ error.message }}</li>
+                }
+              </ul>
             }
           </div>
           <h2 class="text-lg font-medium mb-3">Gender</h2>
@@ -111,7 +113,11 @@
       </div>
     </div>
     <!-- Right: Summary -->
-    <summary-card [childrenCount]="childrenCount()" [subtotal]="subtotal()" [taxes]="taxes()"></summary-card>
+    <summary-card
+      [childrenCount]="childrenCount()"
+      [subtotal]="subtotal()"
+      [taxes]="taxes()"
+    ></summary-card>
   </div>
   <div class="max-w-5xl mx-auto px-6 pb-10">
     <button
