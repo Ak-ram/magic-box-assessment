@@ -3,14 +3,14 @@
   @if (isAuthenticated()) {
     <button
       (click)="logout()"
-      class="text-white border border-white rounded-full px-4 py-1.5 text-sm font-medium"
+      class="text-white cursor-pointer hover:bg-white hover:text-[#AB95F9] transition-colors duration-400 border border-white rounded-full px-4 py-1.5 text-sm font-medium"
     >
       Logout
     </button>
   } @else {
     <a
       routerLink="/login"
-      class="text-white border border-white rounded-full px-4 py-1.5 text-sm font-medium"
+      class="text-white border hover:bg-white hover:text-[#AB95F9] transition-colors duration-400 border-white rounded-full px-4 py-1.5 text-sm font-medium"
     >
       Login
     </a>

@@ -34,6 +34,7 @@ export default class LoginComponent {
       this.authService.login(this.loginModal()).subscribe({
         next: () => {
           const redirectUrl = this.route.snapshot.queryParamMap.get('redirect') || '/landing';
+          console.log('Redirect URL:', redirectUrl);
           this.router.navigate([redirectUrl]);
         },
       });

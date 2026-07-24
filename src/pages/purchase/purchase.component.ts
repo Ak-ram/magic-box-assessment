@@ -78,6 +78,7 @@ export default class PurchaseComponent {
     if (!this.authService.isAuthenticated()) {
       this.purchaseService.saveDraft(this.purchaseModel());
       this.router.navigate(['/login'], { queryParams: { redirect: '/purchase' } });
+      return;
     }
     this.purchaseService.clearDraft();
     console.log('submitting purchase', this.purchaseModel());
