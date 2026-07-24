@@ -16,10 +16,11 @@ export class AuthService {
   private readonly refreshTokenUrl = 'https://dummyjson.com/auth/refresh';
 
   // State
-  private readonly accessToken = signal(
+  readonly #accessToken = signal(
     localStorage.getItem('accessToken') ?? sessionStorage.getItem('accessToken'),
   );
-  isAuthenticated = computed(() => !!this.accessToken());
+  isAuthenticated = computed(() => !!this.#accessToken());
+  accessToken = this.#accessToken();
 
   /**
    * Auth user to return access token & store it in local storage
@@ -50,11 +51,11 @@ export class AuthService {
    * @param accessToken
    * @returns Observable<IUserProfileResponse>
    **/
-  getUserProfile(accessToken: string): Observable<Object> {
+  getUserProfile(): Observable<Object> {
     return this.http
       .get(this.userProfileUrl, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${this.#accessToken()}`,
           credentials: 'include',
         },
       })
@@ -93,7 +94,7 @@ export class AuthService {
     } else {
       sessionStorage.setItem('accessToken', accessToken);
     }
-    this.accessToken.set(accessToken);
+    this.#accessToken.set(accessToken);
   }
 
   /**
@@ -104,6 +105,6 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('accessToken');
     sessionStorage.removeItem('accessToken');
-    this.accessToken.set(null);
+    this.#accessToken.set(null);
   }
 }
