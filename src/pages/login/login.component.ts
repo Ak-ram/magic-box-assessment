@@ -17,6 +17,7 @@ export default class LoginComponent {
 
   // State
   redirect = input<string>();
+  showSpinner = signal<boolean>(false);
   rememberMe = signal<boolean>(false);
   loginModal = signal<ILoginForm>({
     username: 'emilys',
@@ -34,9 +35,11 @@ export default class LoginComponent {
    *
    * @returns void**/
   submit(): void {
+    this.showSpinner.set(true);
     if (this.loginForm().valid()) {
       this.authService.login(this.loginModal(), this.rememberMe()).subscribe({
         next: () => {
+          this.showSpinner.set(false);
           const redirectUrl = this.redirect() || '/landing';
           this.router.navigate([redirectUrl]);
         },

@@ -53,8 +53,13 @@
       <button
         [disabled]="loginForm().invalid()"
         (click)="submit()"
-        class="cursor-pointer w-full border-2 border-[#AB95F9] text-[#AB95F9] font-semibold rounded-full py-3 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="cursor-pointer flex items-center justify-center gap-3 w-full border-2 border-[#AB95F9] text-[#AB95F9] font-semibold rounded-full py-3 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
       >
+        @if (showSpinner()) {
+          <span
+            class="w-4 h-4 inline-block animate-spin border-dotted rounded-full border-3 border-t-0 border-r-0"
+          ></span>
+        }
         Login
       </button>
       <div class="flex items-center gap-3 mt-6">
