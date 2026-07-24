@@ -1,4 +1,4 @@
-export interface loginResponse {
+export interface ILoginResponse {
   accessToken: string;
   refreshToken: string;
   id: number;
@@ -10,7 +10,7 @@ export interface loginResponse {
   image: string;
 }
 
-export interface userProfileResponse {
+export interface IUserProfileResponse {
   id: number;
   firstName: string;
   lastName: string;

@@ -28,18 +28,18 @@ export default class LoginComponent {
     minLength(schemaPath.password, 6, { message: 'Password must be at least 6 characters' });
   });
 
-  // Methods
-  submit() {
+  /**
+   * Submit the login form
+   *
+   * @returns void**/
+  submit(): void {
     if (this.loginForm().valid()) {
-      this.authService.login(this.loginModal()).subscribe({
+      this.authService.login(this.loginModal(), this.rememberMe()).subscribe({
         next: () => {
           const redirectUrl = this.route.snapshot.queryParamMap.get('redirect') || '/landing';
-          console.log('Redirect URL:', redirectUrl);
           this.router.navigate([redirectUrl]);
         },
       });
-      console.log('Form Data:', this.loginModal());
-      console.log('Remember Me:', this.rememberMe());
     }
   }
 

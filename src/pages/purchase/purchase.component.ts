@@ -1,8 +1,4 @@
-import {
-  Component, computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { SummaryCardComponent } from '../../components';
 import {
   form,
@@ -30,16 +26,16 @@ export default class PurchaseComponent {
   private readonly router = inject(Router);
 
   // State
-  readonly boxPrice = 100;
-  readonly boxTax = 10;
-  childrenCount = computed(()=> this.purchaseModel().children.length);
+  readonly boxPrice = 10;
+  readonly boxTax = 1;
+  childrenCount = computed(() => this.purchaseModel().children.length);
   subtotal = computed(() => this.boxPrice * this.childrenCount());
   taxes = computed(() => this.boxTax * this.childrenCount());
   purchaseModel = signal<IPurchaseForm>(
     this.purchaseService.draft() ?? {
       name: '',
       mobile: '',
-      children: [{ childFullName: '', childDOB: '', gender: 'boy' }],
+      children: [{ childFullName: '', childDOB: '', gender: '' as 'boy' }],
     },
   );
   purchaseForm = form(this.purchaseModel, (schemaPath) => {
@@ -51,7 +47,7 @@ export default class PurchaseComponent {
     });
     applyEach(schemaPath.children, (child) => {
       required(child.childFullName, { message: 'Child name is required' });
-      required(child.childDOB, { message: 'Child date of birth is required' });
+      required(child.childDOB, { message: 'Date of birth is required' });
 
       validate(child.childDOB, ({ value }) => {
         const dob = new Date(value());
@@ -64,25 +60,37 @@ export default class PurchaseComponent {
     });
   });
 
-  // Methods
-
-  // Note: Add jsDoc description here
-  addChild() {
-    // this.purchaseModel().children.push({ childFullName: '', childDOB: '', gender: 'boy' });
-    this.purchaseModel.update((current)=> ({
+  /**
+   * Add a new child to the purchase model
+   *
+   * @returns void
+   * **/
+  addChild(): void {
+    this.purchaseModel.update((current) => ({
       ...current,
-      children: [...current.children, { childFullName: '', childDOB: '', gender: 'boy' }]
-    }))
+      children: [...current.children, { childFullName: '', childDOB: '', gender: 'boy' }],
+    }));
   }
 
-  removeChild(index: number) {
-    this.purchaseModel.update((current)=> ({
+  /**
+   * Remove a child from the purchase model
+   *
+   * @param index number
+   * @returns void
+   * **/
+  removeChild(index: number): void {
+    this.purchaseModel.update((current) => ({
       ...current,
-      children: current.children.filter((_, i) => i !== index)
-    }))
+      children: current.children.filter((_, i) => i !== index),
+    }));
   }
-  // Note: Add jsDoc description here
-  submit() {
+
+  /**
+   * Submit the purchase form
+   *
+   * @returns void
+   * **/
+  submit(): void {
     if (this.purchaseForm().invalid()) {
       return;
     }
