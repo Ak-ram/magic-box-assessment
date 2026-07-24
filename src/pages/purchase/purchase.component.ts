@@ -1,9 +1,7 @@
 import {
   Component, computed,
-  ElementRef,
   inject,
   signal,
-  viewChild,
 } from '@angular/core';
 import { SummaryCardComponent } from '../../components';
 import {
