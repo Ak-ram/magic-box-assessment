@@ -10,14 +10,24 @@
           type="text"
           placeholder="Your name"
           [formField]="purchaseForm.name"
-          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
+          class="w-full border border-gray-300 mb-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
         />
+        @if (purchaseForm.name().touched() && purchaseForm.name().errors(); as errors) {
+          @for (error of errors; track error.message) {
+            <p class="text-red-500 text-xs">{{ error.message }}</p>
+          }
+        }
         <input
           type="tel"
           placeholder="Mobile Number"
           [formField]="purchaseForm.mobile"
-          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
+          class="w-full border border-gray-300 mb-1 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#AB95F9]"
         />
+        @if (purchaseForm.mobile().touched() && purchaseForm.mobile().errors(); as errors) {
+          @for (error of errors; track error.message) {
+            <p class="text-red-500 text-xs">{{ error.message }}</p>
+          }
+        }
       </div>
       @let purchaseFormVal = purchaseForm.children().value();
       @for (child of purchaseFormVal; track $index) {
@@ -27,7 +37,7 @@
             <button
               type="button"
               (click)="addChild()"
-              class="border border-[#AB95F9] text-[#AB95F9] rounded-full px-4 py-1.5 text-sm font-medium"
+              class="cursor-pointer border border-[#AB95F9] hover:bg-[#AB95F9] hover:text-white transition-colors duration-400 text-[#AB95F9] rounded-full px-4 py-1.5 text-sm font-medium"
             >
               Add child
             </button>
@@ -82,8 +92,9 @@
   </div>
   <div class="max-w-5xl mx-auto px-6 pb-10">
     <button
+      [disabled]="purchaseForm().invalid()"
       (click)="submit()"
-      class="w-full md:w-2/3 bg-[#AB95F9] text-white font-medium rounded-full py-3"
+      class="w-full md:w-2/3 bg-[#AB95F9] text-white font-medium rounded-full py-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
     >
       Continue to payment
     </button>

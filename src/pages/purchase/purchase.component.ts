@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { SummaryCardComponent } from '../../components';
-import { form, FormField, required, email, minLength } from '@angular/forms/signals';
+import { form, FormField, required, email, minLength, maxLength, pattern } from '@angular/forms/signals';
 import { IPurchaseForm } from '../../models/auth.model';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -26,6 +26,8 @@ export default class PurchaseComponent {
   purchaseForm = form(this.purchaseModel, (schemaPath) => {
     required(schemaPath.name, { message: 'Name is required' });
     required(schemaPath.mobile, { message: 'Mobile is required' });
+    // maxLength(schemaPath.mobile, 11, { message: 'Mobile must be at most 11 characters' });
+    pattern(schemaPath.mobile, /^01\d{9}$/, { message: 'Mobile must be 11 digits starting with 01' });
   });
   price = signal(456);
   taxes = signal(4.0);
