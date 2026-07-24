@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal, WritableSignal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal, WritableSignal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { IUserProfileResponse } from '../../models/auth.model';
@@ -13,7 +13,7 @@ export default class HeaderComponent {
   // Injection list
   private readonly authService: AuthService = inject(AuthService);
   private readonly purchaseService = inject(PurchaseService);
-  private readonly router: Router = inject(Router);
+  readonly router: Router = inject(Router);
 
   // State
   isAuthenticated = this.authService.isAuthenticated;
@@ -29,6 +29,16 @@ export default class HeaderComponent {
       });
     });
   }
+
+  /**
+   * Check if the current route is the login route
+   *
+   * @returns boolean
+   * **/
+  get isLoginRoute(): boolean {
+    return this.router.url === '/login';
+  }
+
   /**
    * Logout user and navigate to landing page
    *
