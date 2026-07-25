@@ -27,4 +27,24 @@ describe('PurchaseService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should have null draft initially when session-storage is emtpy', () => {
+    expect(service.draft()).toBeNull();
+  });
+
+  it('should save draft to session-storage', () => {
+    service.saveDraft(mockDraft);
+    expect(service.draft()).toEqual(mockDraft);
+    expect(sessionStorage.getItem('purchase-draft')).toBeTruthy();
+  });
+
+  it('should clear draft from session-storage', () => {
+    service.saveDraft(mockDraft);
+    expect(service.draft()).toEqual(mockDraft);
+
+    service.clearDraft();
+
+    expect(service.draft()).toBeNull();
+    expect(sessionStorage.getItem('purchase-draft')).toBeFalsy();
+  });
 });
