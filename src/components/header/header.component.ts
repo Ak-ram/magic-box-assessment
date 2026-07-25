@@ -21,12 +21,14 @@ export default class HeaderComponent {
 
   constructor() {
     effect(() => {
-      this.authService.getUserProfile().subscribe({
-        next: (profile: Object): void => {
-          this.profile.set(profile as IUserProfileResponse);
-          console.log('res', profile);
-        },
-      });
+      if (this.isAuthenticated()) {
+        this.authService.getUserProfile().subscribe({
+          next: (profile: Object): void => {
+            this.profile.set(profile as IUserProfileResponse);
+            console.log('res', profile);
+          },
+        });
+      }
     });
   }
 
