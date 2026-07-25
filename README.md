@@ -111,6 +111,79 @@ export const routes: Routes = [
 
 ---
 
+## Packages & Dependencies
+
+```mermaid
+graph TD
+    A["📦 Dependencies"] --> A1["Angular Core<br/>@angular/core ^21.2.0"]
+    A --> A2["Angular Router<br/>@angular/router ^21.2.0"]
+    A --> A3["Angular Forms<br/>@angular/forms ^21.2.0"]
+    A --> A4["Angular Common<br/>@angular/common ^21.2.0"]
+    A --> A5["Angular Platform<br/>@angular/platform-browser ^21.2.0"]
+    A --> A6["Angular Compiler<br/>@angular/compiler ^21.2.0"]
+    A --> A7["RxJS<br/>~7.8.0"]
+    A --> A8["tslib<br/>^2.3.0"]
+    
+    B["🛠️ DevDependencies"] --> B1["Angular CLI<br/>@angular/cli ^21.2.19"]
+    B --> B2["Angular Build<br/>@angular/build ^21.2.19"]
+    B --> B3["Tailwind CSS<br/>tailwindcss ^4.1.12"]
+    B --> B4["PostCSS<br/>postcss ^8.5.3"]
+    B --> B5["TypeScript<br/>~5.9.2"]
+    B --> B6["Prettier<br/>^3.8.1"]
+    B --> B7["Jasmine & Karma<br/>jasmine-core ^6.3.0"]
+    B --> B8["Zone.js<br/>^0.16.2"]
+    
+    style A fill:#4ECDC4,stroke:#333,stroke-width:2px,color:#fff
+    style A1 fill:#FF6B9D,stroke:#333,stroke-width:2px,color:#fff
+    style A2 fill:#FFE66D,stroke:#333,stroke-width:2px,color:#333
+    style A3 fill:#F38181,stroke:#333,stroke-width:2px,color:#fff
+    style A4 fill:#AEDDA8,stroke:#333,stroke-width:2px,color:#fff
+    style A5 fill:#95B8D1,stroke:#333,stroke-width:2px,color:#fff
+    style A6 fill:#B19CD9,stroke:#333,stroke-width:2px,color:#fff
+    style A7 fill:#D4A5A5,stroke:#333,stroke-width:2px,color:#fff
+    style A8 fill:#95E1D3,stroke:#333,stroke-width:2px,color:#333
+    
+    style B fill:#FF9E64,stroke:#333,stroke-width:2px,color:#fff
+    style B1 fill:#FF6B9D,stroke:#333,stroke-width:2px,color:#fff
+    style B2 fill:#FFE66D,stroke:#333,stroke-width:2px,color:#333
+    style B3 fill:#F38181,stroke:#333,stroke-width:2px,color:#fff
+    style B4 fill:#AEDDA8,stroke:#333,stroke-width:2px,color:#fff
+    style B5 fill:#95B8D1,stroke:#333,stroke-width:2px,color:#fff
+    style B6 fill:#B19CD9,stroke:#333,stroke-width:2px,color:#fff
+    style B7 fill:#D4A5A5,stroke:#333,stroke-width:2px,color:#fff
+    style B8 fill:#95E1D3,stroke:#333,stroke-width:2px,color:#333
+```
+
+**Production Dependencies:**
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `@angular/core` | ^21.2.0 | Angular core framework |
+| `@angular/router` | ^21.2.0 | Client-side routing |
+| `@angular/forms` | ^21.2.0 | Form handling |
+| `@angular/common` | ^21.2.0 | Common directives & pipes |
+| `@angular/platform-browser` | ^21.2.0 | Browser platform |
+| `@angular/compiler` | ^21.2.0 | Template compiler |
+| `rxjs` | ~7.8.0 | Reactive programming |
+| `tslib` | ^2.3.0 | TypeScript helpers |
+
+**Dev Dependencies:**
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `@angular/cli` | ^21.2.19 | Command-line tools |
+| `@angular/build` | ^21.2.19 | Build tools |
+| `tailwindcss` | ^4.1.12 | Utility-first CSS |
+| `@tailwindcss/postcss` | ^4.1.12 | PostCSS plugin for Tailwind |
+| `postcss` | ^8.5.3 | CSS transformations |
+| `typescript` | ~5.9.2 | TypeScript compiler |
+| `prettier` | ^3.8.1 | Code formatter |
+| `jasmine-core` | ^6.3.0 | Testing framework |
+| `karma` | ^6.4.4 | Test runner |
+| `zone.js` | ^0.16.2 | Zone management |
+
+---
+
 ## Commands
 
 **Dev**
@@ -124,7 +197,7 @@ ng generate guard GuardName            # New guard
 **Build & Test**
 ```bash
 ng build --configuration production    # Production build
-ng test                                # Unit tests (Vitest)
+ng test                                # Unit tests (Jasmine/Karma)
 ng e2e                                 # E2E tests
 ```
 
