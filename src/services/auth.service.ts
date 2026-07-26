@@ -31,7 +31,7 @@ export class AuthService {
   login(loginForm?: ILoginForm, rememberMe: boolean = false): Observable<ILoginResponse> {
     const body = JSON.stringify({
       ...loginForm,
-      expiresInMins: 1,
+      expiresInMins: 30,
     });
     return this.http
       .post(this.loginUrl, body, {
