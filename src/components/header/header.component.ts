@@ -27,6 +27,9 @@ export default class HeaderComponent {
             this.profile.set(profile as IUserProfileResponse);
             console.log('res', profile);
           },
+          error: ():void => {
+            window.alert("Something went wrong while fetching profile data")
+          }
         });
       }
     });
