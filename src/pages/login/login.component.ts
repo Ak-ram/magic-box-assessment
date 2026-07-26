@@ -19,6 +19,7 @@ export default class LoginComponent {
   redirect = input<string>();
   showSpinner = signal<boolean>(false);
   rememberMe = signal<boolean>(false);
+  errorMessage = signal<string | null>(null);
   loginModal = signal<ILoginForm>({
     username: 'emilys',
     password: 'emilyspass',
@@ -36,6 +37,7 @@ export default class LoginComponent {
    * @returns void**/
   submit(): void {
     this.showSpinner.set(true);
+    this.errorMessage.set(null);
     if (this.loginForm().valid()) {
       this.authService.login(this.loginModal(), this.rememberMe()).subscribe({
         next: () => {
@@ -43,6 +45,10 @@ export default class LoginComponent {
           const redirectUrl = this.redirect() || '/landing';
           this.router.navigate([redirectUrl]);
         },
+        error: () => {
+          this.showSpinner.set(false);
+          this.errorMessage.set("Something went wrong, please try again.");
+        }
       });
     }
   }
