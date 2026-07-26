@@ -12,7 +12,7 @@
 > - if `unchecked` : Your token will be stored in `sessionStorage`. so you will be logged out once your session ends (close tab)
 > <img width="849" height="397" alt="image" src="https://github.com/user-attachments/assets/dc4adc1d-780b-4c88-bc01-15fd6c04029b" />
 >
-> - After `1 min`, your token will expire, so you must login again.
+> - After `30 min`, your token will expire, so you must login again.
 
 > [!IMPORTANT]
 > - If `non-auth` user fill & submit *purchase form*, his data will be save as `draft` & he will be redirected to `login` page.
